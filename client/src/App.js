@@ -3,6 +3,7 @@ import Navbar from './components/navbar/navbar.js';
 import Jeopardy from './components/Jeopardy/jeopardy.js';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 
 function App() {
   return (
