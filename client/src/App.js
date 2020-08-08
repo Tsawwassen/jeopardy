@@ -1,5 +1,6 @@
 import React from 'react';
-import Navbar from './components/navbar/navbar.js'
+import Navbar from './components/navbar/navbar.js';
+import Jeopardy from './components/Jeopardy/jeopardy.js';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -8,7 +9,7 @@ function App() {
      <div className="App"> 
       <Navbar />
       <div className="container">
-        <h1>hello</h1>
+        <Jeopardy />
       </div>
 
      </div>
