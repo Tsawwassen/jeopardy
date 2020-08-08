@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import {Navbar, Nav} from 'react-bootstrap';
+import {Navbar} from 'react-bootstrap';
+
+import './navbar.css';
 
 class Navigation extends Component {
 
@@ -14,9 +16,7 @@ class Navigation extends Component {
       <div>
         <Navbar bg="dark" variant="dark">
           <Navbar.Brand href="/">!Jeopardy</Navbar.Brand>
-          <Nav className="mr-auto">
-            <Nav.Link href="#"></Nav.Link>
-          </Nav>
+        
         </Navbar>
       </div>
     );
