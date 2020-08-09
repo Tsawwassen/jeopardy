@@ -6,7 +6,7 @@ class Home extends Component {
   		return (
   			<div>
   				<Button onClick={this.props.onClick[0]}> Create Jeopardy Game </Button>
-  				<Button onClick={this.props.onClick[1]}> Use Defauly Jeopardy Game </Button>
+  				<Button onClick={this.props.onClick[1]}> Use Default Jeopardy Game </Button>
   			</div>
   		);
   	}
