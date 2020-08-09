@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Home from './home.js';
 import Create from './create.js';
 import Board from './board.js';
+import Question from './question.js';
 
 class Jeopardy extends Component {
 
@@ -26,6 +27,8 @@ class Jeopardy extends Component {
 	    this.useDefaultBoard = this.useDefaultBoard.bind(this);
 
 	    this.questionClicked = this.questionClicked.bind(this);
+
+	    this.showAnswer = this.showAnswer.bind(this);
 	}
 
 	componentDidMount(){
@@ -131,7 +134,14 @@ class Jeopardy extends Component {
   			if((i + 1) === t_board[t_cat_index].asked.length) t_board[t_cat_index].complete = true;
   		}
 
-  		this.setState({cat_index: t_cat_index, que_index: t_que_index, view: "question", board: t_board});
+  		let t_selected = {cat_index: t_cat_index, que_index: t_que_index}
+
+  		this.setState({selected:t_selected, view: "question", board: t_board});
+  	}
+
+  	showAnswer(event){
+  		console.log("inside show anwer");
+  		event.preventDefault();
   	}
 
   	//Note, might not need all of these view checks here. Some components might be managed inside other components 
@@ -140,7 +150,7 @@ class Jeopardy extends Component {
 	  	if(this.state.view === "home") return (<Home onClick={[this.createView, this.useDefaultBoard]} />);
 	  	if(this.state.view === "create") return (<Create onChange={this.createOnChange} onSubmit={this.createOnSubmit} />);
 	  	if(this.state.view === "play") return (<Board value={this.state.board} onClick={this.questionClicked}/>);
-	  	if(this.state.view === "question") return (<h1>question</h1>);
+	  	if(this.state.view === "question") return (<Question value={this.state.board[this.state.selected.cat_index].questions[this.state.selected.que_index]} onClick={this.showAnswer}/> );
 	  	if(this.state.view === "answer") return (<h1>answer</h1>);
   	}
 }
