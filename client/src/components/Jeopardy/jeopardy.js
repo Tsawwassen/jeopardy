@@ -20,6 +20,8 @@ class Jeopardy extends Component {
 	    this.updateCategory = this.updateCategory.bind(this);
 	    this.updateQuestion = this.updateQuestion.bind(this);
 	    this.updateAnswer = this.updateAnswer.bind(this);
+
+	    this.useDefaultBoard = this.useDefaultBoard.bind(this);
 	}
 
 	componentDidMount(){
@@ -88,19 +90,35 @@ class Jeopardy extends Component {
   		t_board[cat_index].answers[ans_index] = ans_update;
   		this.setState({board: t_board});
   	}
+
+  	useDefaultBoard(){
+  		let t_board = [
+			{"category":"c0","questions":["q00","q01","q02","q03","q04"],"answers":["a00","a01","a02","a03","a04"]},
+			{"category":"c1","questions":["q10","q11","q12","q13","q14"],"answers":["a10","a11","a12","a13","a15"]},
+			{"category":"c2","questions":["q20","q21","q22","q23","q24"],"answers":["a20","a21","a22","a23","a24"]},
+			{"category":"c3","questions":["q30","q31","q32","q33","q34"],"answers":["a30","a31","a32","a33","a34"]},
+			{"category":"c4","questions":["q40","q41","q42","q43","q44"],"answers":["a40","a41","a42","a43","a44"]},
+			{"category":"c5","questions":["q50","q51","q52","q53","q54"],"answers":["a50","a51","a52","a53","a54"]}
+		];
+		this.setState({board: t_board});
+		this.setState({view: "play"});
+
+  	}
   
   	createOnSubmit(event){
   		//console.log("inside Jeopardy createOnSubmit");
-  		console.log(this.state.board);
+  		//console.log(JSON.stringify(this.state.board));
+
+  		this.setState({view: "play"});
   		event.preventDefault();
   	}
 
   	//Note, might not need all of these view checks here. Some components might be managed inside other components 
   	//(ie the question can render the answer, and not managed by this component)
   	render () { 
-	  	if(this.state.view === "home") return (<Home onClick={this.createView} />);
+	  	if(this.state.view === "home") return (<Home onClick={[this.createView, this.useDefaultBoard]} />);
 	  	if(this.state.view === "create") return (<Create onChange={this.createOnChange} onSubmit={this.createOnSubmit} />);
-	  	if(this.state.view === "board") return (<h1>board</h1>);
+	  	if(this.state.view === "play") return (<h1>play</h1>);
 	  	if(this.state.view === "question") return (<h1>question</h1>);
 	  	if(this.state.view === "answer") return (<h1>answer</h1>);
   	}
