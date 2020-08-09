@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Home from './home.js';
 import Create from './create.js';
+import Board from './board.js';
 
 class Jeopardy extends Component {
 
@@ -29,8 +30,10 @@ class Jeopardy extends Component {
       	for(let i = 0 ; i < 6 ; i++){
       		t_board.push({
       			category: "",
+      			complete: false,
       			questions: new Array(5),
-      			answers: new Array(5)
+      			answers: new Array(5),
+      			asked: new Array(5).fill(false)
       		});
       	}
       	this.setState({board: t_board})
@@ -91,24 +94,21 @@ class Jeopardy extends Component {
   		this.setState({board: t_board});
   	}
 
+  	//Add function to create a default board for testing purposes
   	useDefaultBoard(){
   		let t_board = [
-			{"category":"c0","questions":["q00","q01","q02","q03","q04"],"answers":["a00","a01","a02","a03","a04"]},
-			{"category":"c1","questions":["q10","q11","q12","q13","q14"],"answers":["a10","a11","a12","a13","a15"]},
-			{"category":"c2","questions":["q20","q21","q22","q23","q24"],"answers":["a20","a21","a22","a23","a24"]},
-			{"category":"c3","questions":["q30","q31","q32","q33","q34"],"answers":["a30","a31","a32","a33","a34"]},
-			{"category":"c4","questions":["q40","q41","q42","q43","q44"],"answers":["a40","a41","a42","a43","a44"]},
-			{"category":"c5","questions":["q50","q51","q52","q53","q54"],"answers":["a50","a51","a52","a53","a54"]}
+			{"category":"c0","complete":false,"questions":["q00","q01","q02","q03","q04"],"answers":["a00","a01","a02","a03","a04"],"asked":[false,false,false,false,false]},
+			{"category":"c1","complete":false,"questions":["q10","q11","q12","q13","q14"],"answers":["a10","a11","a12","a13","a14"],"asked":[false,false,false,false,false]},
+			{"category":"c2","complete":false,"questions":["q20","q21","q22","q23","q24"],"answers":["a20","a21","a22","a23","a24"],"asked":[false,false,false,false,false]},
+			{"category":"c3","complete":false,"questions":["q30","q31","q32","q33","q34"],"answers":["a30","a31","a32","a33","a34"],"asked":[false,false,false,false,false]},
+			{"category":"c4","complete":false,"questions":["q40","q41","q42","q43","q44"],"answers":["a40","a41","a42","a43","a44"],"asked":[false,false,false,false,false]},
+			{"category":"c5","complete":false,"questions":["q50","q51","q52","q53","q54"],"answers":["a50","a51","a52","a53","a54"],"asked":[false,false,false,false,false]}
 		];
-		this.setState({board: t_board});
-		this.setState({view: "play"});
-
+		this.setState({board: t_board, view: "play"});
   	}
-  
+  	
+  	//The host has input all board information and is ready to start the game
   	createOnSubmit(event){
-  		//console.log("inside Jeopardy createOnSubmit");
-  		//console.log(JSON.stringify(this.state.board));
-
   		this.setState({view: "play"});
   		event.preventDefault();
   	}
@@ -118,7 +118,7 @@ class Jeopardy extends Component {
   	render () { 
 	  	if(this.state.view === "home") return (<Home onClick={[this.createView, this.useDefaultBoard]} />);
 	  	if(this.state.view === "create") return (<Create onChange={this.createOnChange} onSubmit={this.createOnSubmit} />);
-	  	if(this.state.view === "play") return (<h1>play</h1>);
+	  	if(this.state.view === "play") return (<Board value={this.state.board} />);
 	  	if(this.state.view === "question") return (<h1>question</h1>);
 	  	if(this.state.view === "answer") return (<h1>answer</h1>);
   	}
