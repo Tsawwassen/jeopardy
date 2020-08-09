@@ -23,6 +23,8 @@ class Jeopardy extends Component {
 	    this.updateAnswer = this.updateAnswer.bind(this);
 
 	    this.useDefaultBoard = this.useDefaultBoard.bind(this);
+
+	    this.questionClicked = this.questionClicked.bind(this);
 	}
 
 	componentDidMount(){
@@ -113,12 +115,16 @@ class Jeopardy extends Component {
   		event.preventDefault();
   	}
 
+  	questionClicked(event){
+  		console.log((event.target.name));
+  	}
+
   	//Note, might not need all of these view checks here. Some components might be managed inside other components 
   	//(ie the question can render the answer, and not managed by this component)
   	render () { 
 	  	if(this.state.view === "home") return (<Home onClick={[this.createView, this.useDefaultBoard]} />);
 	  	if(this.state.view === "create") return (<Create onChange={this.createOnChange} onSubmit={this.createOnSubmit} />);
-	  	if(this.state.view === "play") return (<Board value={this.state.board} />);
+	  	if(this.state.view === "play") return (<Board value={this.state.board} onClick={this.questionClicked}/>);
 	  	if(this.state.view === "question") return (<h1>question</h1>);
 	  	if(this.state.view === "answer") return (<h1>answer</h1>);
   	}

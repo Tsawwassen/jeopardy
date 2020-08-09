@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Table from 'react-bootstrap/Table'
+import {Table, Button} from 'react-bootstrap'
 
 
 class Board extends Component {
@@ -22,17 +22,21 @@ class Board extends Component {
 		if(category.complete) return (<th key={i}></th>);
 		else return (<th key={i}>{category.category}</th>);
 
+		//I've tried getting the above code to work with a ternery operations, but it just does not seem to accept it
+
 	}
 
 	createRow(price, i, board){
 
+
+		//It would be nice to nest the below code in another loop, but for not its working
 		return (<tr key={i}>
-					{(!board[0].complete && !board[0].asked[i]) ? <td>{price}</td> : <td></td>}
-					{(!board[1].complete && !board[1].asked[i]) ? <td>{price}</td> : <td></td>}
-					{(!board[2].complete && !board[2].asked[i]) ? <td>{price}</td> : <td></td>}
-					{(!board[3].complete && !board[3].asked[i]) ? <td>{price}</td> : <td></td>}
-					{(!board[4].complete && !board[4].asked[i]) ? <td>{price}</td> : <td></td>}
-					{(!board[5].complete && !board[5].asked[i]) ? <td>{price}</td> : <td></td>}
+					{(!board[0].complete && !board[0].asked[i]) ? <td><Button onClick={this.props.onClick} name={`c0q${i}`}>{price}</Button></td> : <td></td>}
+					{(!board[1].complete && !board[1].asked[i]) ? <td><Button onClick={this.props.onClick} name={`c1q${i}`}>{price}</Button></td> : <td></td>}
+					{(!board[2].complete && !board[2].asked[i]) ? <td><Button onClick={this.props.onClick} name={`c2q${i}`}>{price}</Button></td> : <td></td>}
+					{(!board[3].complete && !board[3].asked[i]) ? <td><Button onClick={this.props.onClick} name={`c3q${i}`}>{price}</Button></td> : <td></td>}
+					{(!board[4].complete && !board[4].asked[i]) ? <td><Button onClick={this.props.onClick} name={`c4q${i}`}>{price}</Button></td> : <td></td>}
+					{(!board[5].complete && !board[5].asked[i]) ? <td><Button onClick={this.props.onClick} name={`c5q${i}`}>{price}</Button></td> : <td></td>}
 				</tr>);
 	}
 
