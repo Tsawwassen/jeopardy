@@ -43,11 +43,11 @@ class Create extends Component {
 			form.push( <div>
 				<Row>
 		    		<Col><Form.Label>Question {question + 1}</Form.Label></Col>
-		    		<Col><Form.Control name={'q' + question} type="text" placeholder={'Question ' + (question + 1)} onChange={this.props.onChange} /></Col>
+		    		<Col><Form.Control name={'c' + category + 'q' + question} type="text" placeholder={'Question ' + (question + 1)} onChange={this.props.onChange} /></Col>
 		    	</Row>
 		    	<Row>
 		    		<Col><Form.Label>Answer {question + 1}</Form.Label></Col>
-					<Col><Form.Control name={'a' + question} type="text" placeholder={'Answer ' + (question + 1)} onChange={this.props.onChange} /></Col>
+					<Col><Form.Control name={'c' + category + 'a' + question} type="text" placeholder={'Answer ' + (question + 1)} onChange={this.props.onChange} /></Col>
 				</Row>
 				<br /></div>
 			);
