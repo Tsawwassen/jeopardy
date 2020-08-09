@@ -10,7 +10,8 @@ class Jeopardy extends Component {
 	    this.state = {
 	    	view: "home",
 	    	board: [],
-	    	timer: 5
+	    	timer: 5, // Timer for how long players have to respond after buzzing in, NYI
+	    	selected: { cat_index: 0, que_index: 0}
 	    };
 
 	    this.createView = this.createView.bind(this);
@@ -115,8 +116,22 @@ class Jeopardy extends Component {
   		event.preventDefault();
   	}
 
+  	//Save index of category and question that is clicked, change the view to question
   	questionClicked(event){
-  		console.log((event.target.name));
+  		let t_cat_index = event.target.name[1];
+  		let t_que_index = event.target.name[3];
+  		let t_board = this.state.board;
+
+  		//Set the question as asked
+  		t_board[t_cat_index].asked[t_que_index] = true;
+
+  		//Check if all questions in a category have been asked
+  		for(let i = 0 ; i < t_board[t_cat_index].asked.length ; i++){
+  			if(!t_board[t_cat_index].asked[i]) break;
+  			if((i + 1) === t_board[t_cat_index].asked.length) t_board[t_cat_index].complete = true;
+  		}
+
+  		this.setState({cat_index: t_cat_index, que_index: t_que_index, view: "question", board: t_board});
   	}
 
   	//Note, might not need all of these view checks here. Some components might be managed inside other components 
