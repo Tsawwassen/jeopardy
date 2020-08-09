@@ -11,10 +11,17 @@ class Board extends Component {
     }
 
     this.createRow = this.createRow.bind(this);
+    this.createHeader = this.createHeader.bind(this);
   }
 
 	componentDidMount(){
 		//console.log(this.props.value);
+	}
+
+	createHeader(category, i){
+		if(category.complete) return (<th key={i}></th>);
+		else return (<th key={i}>{category.category}</th>);
+
 	}
 
 	createRow(price, i, board){
@@ -45,8 +52,7 @@ class Board extends Component {
 				  	<thead>
 					    <tr>
 					        {board.map((category, i) =>{
-					        	if(category.complete) return (<th key={i}></th>);
-						        else return (<th key={i}>{category.category}</th>)
+					        	return this.createHeader(category, i);
 						    })}
 					        					    
 					    </tr>
