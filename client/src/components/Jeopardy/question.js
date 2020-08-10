@@ -4,7 +4,6 @@ import {Button} from 'react-bootstrap';
 class Question extends Component {
 
   	render () { 
-  		console.log(this.props.value);
   		return (
   			<div>
   				<h1>{this.props.value}</h1>
