@@ -3,6 +3,7 @@ import Home from './home.js';
 import Create from './create.js';
 import Board from './board.js';
 import Question from './question.js';
+import Answer from './answer.js';
 
 class Jeopardy extends Component {
 
@@ -29,6 +30,8 @@ class Jeopardy extends Component {
 	    this.questionClicked = this.questionClicked.bind(this);
 
 	    this.showAnswer = this.showAnswer.bind(this);
+
+	    this.showBoard = this.showBoard.bind(this);
 	}
 
 	componentDidMount(){
@@ -140,7 +143,13 @@ class Jeopardy extends Component {
   	}
 
   	showAnswer(event){
-  		console.log("inside show anwer");
+  	
+  		this.setState({view: "answer"});
+  		event.preventDefault();
+  	}
+
+  	showBoard(event){
+  		this.setState({view: "play"});
   		event.preventDefault();
   	}
 
@@ -151,7 +160,7 @@ class Jeopardy extends Component {
 	  	if(this.state.view === "create") return (<Create onChange={this.createOnChange} onSubmit={this.createOnSubmit} />);
 	  	if(this.state.view === "play") return (<Board value={this.state.board} onClick={this.questionClicked}/>);
 	  	if(this.state.view === "question") return (<Question value={this.state.board[this.state.selected.cat_index].questions[this.state.selected.que_index]} onClick={this.showAnswer}/> );
-	  	if(this.state.view === "answer") return (<h1>answer</h1>);
+	  	if(this.state.view === "answer") return (<Answer value={this.state.board[this.state.selected.cat_index].answers[this.state.selected.que_index]} onClick={this.showBoard}/>);
   	}
 }
 
