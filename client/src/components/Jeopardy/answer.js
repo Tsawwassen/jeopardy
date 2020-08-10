@@ -4,10 +4,10 @@ import {Button} from 'react-bootstrap';
 class Answer extends Component {
 
   	render () { 
-  		console.log("Inside answer component");
   		return (
   			<div>
-  				<h1>Answer</h1>
+  				<h1>{this.props.value}</h1>
+  				<Button onClick={this.props.onClick}> Back to Board</Button>
   			
   			</div>
   		);
